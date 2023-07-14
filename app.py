@@ -1,12 +1,14 @@
-from langchain.llms import OpenAI
+from langchain.document_loaders import TextLoader
+from langchain.indexes import VectorstoreIndexCreator
+# Document loader
+loader = TextLoader("data.txt")
+# Index that wraps above steps
+index = VectorstoreIndexCreator().from_loaders([loader])
+# Question-answering
+question = "What's the most time effective way to complete each of the tasks in the data.txt file?"
 
-#access openai api and select model
-llm = OpenAI(temperature=0.9, model_name="ada")
+answer = index.query(question)
 
-#collects generated tex
-resp = llm.predict("I like to eat")
-
-print(resp)
-
+print(answer)
 
 
