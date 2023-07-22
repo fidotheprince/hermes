@@ -1,0 +1,3 @@
+Task 0: Developing an AI based application that shows users what exercises they can do to increase their performance when completing a task they list. 
+Task 1: Record and edit a variety of short form content that is intended to inform viewers on technology trends and how to profit from them. 
+Task 2: Run a programming skilltest with a student where I challenge his ability to understand that the fundamentals of working with APIs.
