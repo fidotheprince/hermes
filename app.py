@@ -5,6 +5,7 @@ saves it to a file, and analyzes the tasks to answer a preset question.
 
 from langchain.document_loaders import TextLoader
 from langchain.indexes import VectorstoreIndexCreator
+from langchain.chat_models import ChatOpenAI
 
 def is_number(num_str):
     """
@@ -27,14 +28,17 @@ def analyze_text():
     Load a text document, create an index for it, and use this index 
     to answer a pre-defined question.
     """
+    # Specify the LLM
+    llm = ChatOpenAI(temperature=0.5)
+
     # Document loader
     loader = TextLoader("data.txt")
     # Index that wraps above steps
     index = VectorstoreIndexCreator().from_loaders([loader])
     # Question-answering
-    question = "Can you tell exercises or habit I can do to optimize my physical and cognative ability to complete each task?"
+    question = "Can you help me draft some key milestones for being able to complete each large task?"
 
-    answer = index.query(question)
+    answer = index.query(question, llm=llm)
 
     print(answer)
 
