@@ -7,6 +7,22 @@ from langchain.document_loaders import TextLoader
 from langchain.indexes import VectorstoreIndexCreator
 from langchain.chat_models import ChatOpenAI
 
+def color_text(text, color):
+    """Returns the provided text in the specified color."""
+    colors = {
+        "red": '\033[91m',
+        "green": '\033[92m',
+        "yellow": '\033[93m',
+        "blue": '\033[94m',
+        "purple": '\033[95m'
+    }
+
+    # Default to original color if the specified color is not recognized
+    color_code = colors.get(color, '\033[0m')
+
+    return color_code + text + '\033[0m'
+
+
 def is_number(num_str):
     """
     Check if the provided string can be converted to an integer.
@@ -40,7 +56,7 @@ def analyze_text():
 
     answer = index.query(question, llm=llm)
 
-    print(answer)
+    print(color_text(answer, "purple"))
 
 def collect_data():
     """
@@ -48,9 +64,9 @@ def collect_data():
     and call analyze_text() to process and analyze the tasks.
     """
     # Prompt the user to enter some text
-    num_str = input("Hello how many tasks do you have to complete today? ")
+    num_str = input(color_text("Hello how many tasks / projects would you like me draft milestones for? ", "purple"))
     if is_number(num_str):
-        print("Thank you, please enter your tasks below:")
+        print(color_text("Thank you, please enter your tasks below:", "purple"))
 
         num_times = int(num_str)
 
@@ -62,10 +78,10 @@ def collect_data():
                 # Write the text to the file
                 file.write(f"Task {i}: " + text + "\n")
                 # Close the connection to the file
-        print("Thank you, your tasks have been saved, please wait while we analyze your tasks...")
+        print(color_text("Thank you, your tasks have been saved, please wait while we analyze your tasks...", "purple"))
         analyze_text()
     else:
-        print("You did not enter a number")
+        print(color_text("You did not enter a number", "red"))
 
 def main():
     """
