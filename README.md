@@ -1,6 +1,6 @@
 # Hermes
-Desktop app that uses AI to help deconstruct large life goals into manageable subtasks. 
+Hermes is a productivity app that allows a user to break down large goals or tasks into smaller and more managable milestones. 
 
-# Notes:
-The more detailed you are with your entry for each task, the better responses the application is able to provide for you.  
+# Technical Design for Hermes
+![Hermes Technical Design](/Misc/hermes_design.png)
 

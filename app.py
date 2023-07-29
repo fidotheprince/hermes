@@ -52,7 +52,7 @@ def analyze_text():
     # Index that wraps above steps
     index = VectorstoreIndexCreator().from_loaders([loader])
     # Question-answering
-    question = "Can you help me draft some key milestones for being able to complete each large task?"
+    question = "Can you help me draft some key milestones for being able to complete the task or set of tasks I've listed. Please list the milestones in a bulleted list."
 
     answer = index.query(question, llm=llm)
 
@@ -72,11 +72,11 @@ def collect_data():
 
         for i in range(num_times):
 
-            text = input(f"Please enter a task {i}: ")
+            text = input("->")
             # Open the file in write mode ('w')
             with open("data.txt", "a", encoding='utf-8') as file:
                 # Write the text to the file
-                file.write(f"Task {i}: " + text + "\n")
+                file.write(f"Task {i + 1}" + text + "\n")
                 # Close the connection to the file
         print(color_text("Thank you, your tasks have been saved, please wait while we analyze your tasks...", "purple"))
         analyze_text()
